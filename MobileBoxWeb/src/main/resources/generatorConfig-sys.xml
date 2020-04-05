@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="E:/mysql/mysql-connector-java-5.1.6-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<plugin type="com.knowyou.cloud.sys.plugins.MySqlLimitPlugin"></plugin>
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.92.28.122:3306/ky_cloud" userId="knowyou" password="ky701@YH.com" />
+<!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.26.177.92:3306/ky_cloud" userId="knowyou" password="ky701@YH.com" /> -->
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成vo对象 -->
+		<javaModelGenerator targetPackage="com.knowyou.cloud.sys.model" targetProject="MobileBoxWeb" />
+		<!-- 生成用于查询的xml对象 -->
+		<sqlMapGenerator targetPackage="com.knowyou.cloud.sys.model.mapper" targetProject="MobileBoxWeb" />
+		<!-- 生成DAO的类文件以及配置文件 -->
+		<javaClientGenerator targetPackage="com.knowyou.cloud.sys.dao" targetProject="MobileBoxWeb" type="XMLMAPPER" />
+
+		<!-- <table schema="ky_cloud" tableName="t_sys_group" domainObjectName="Group" /> -->
+
+		<!-- <table schema="ky_cloud" tableName="t_sys_domain" domainObjectName="Domain" /> -->
+		<table schema="ky_cloud" tableName="t_sys_user_role" domainObjectName="UserRole" />
+		<!-- <table schema="ky_cloud" tableName="t_sys_role" domainObjectName="Role" /> -->
+
+	</context>
+	
+</generatorConfiguration>  

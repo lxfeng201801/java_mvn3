@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knowyou.cloud.sys.dao.VideoKaMapper">
+  <resultMap id="BaseResultMap" type="com.knowyou.cloud.sys.model.mobilebox.VideoKa">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="district_id" jdbcType="INTEGER" property="districtId" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="ka_time" jdbcType="INTEGER" property="kaTime" />
+    <result column="quit_time" jdbcType="INTEGER" property="quitTime" />
+    <result column="jump_time" jdbcType="INTEGER" property="jumpTime" />
+    <result column="ff_time" jdbcType="INTEGER" property="ffTime" />
+    <result column="ff_ka_time" jdbcType="INTEGER" property="ffKaTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, province_id, city_id, district_id, date, ka_time, quit_time, jump_time, ff_time, 
+    ff_ka_time
+  </sql>
+  <select id="selectByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_video_ka
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_video_ka
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_video_ka
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKaExample">
+    delete from t_video_ka
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKa">
+    insert into t_video_ka (id, province_id, city_id, 
+      district_id, date, ka_time, 
+      quit_time, jump_time, ff_time, 
+      ff_ka_time)
+    values (#{id,jdbcType=INTEGER}, #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, 
+      #{districtId,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{kaTime,jdbcType=INTEGER}, 
+      #{quitTime,jdbcType=INTEGER}, #{jumpTime,jdbcType=INTEGER}, #{ffTime,jdbcType=INTEGER}, 
+      #{ffKaTime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKa">
+    insert into t_video_ka
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="districtId != null">
+        district_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="kaTime != null">
+        ka_time,
+      </if>
+      <if test="quitTime != null">
+        quit_time,
+      </if>
+      <if test="jumpTime != null">
+        jump_time,
+      </if>
+      <if test="ffTime != null">
+        ff_time,
+      </if>
+      <if test="ffKaTime != null">
+        ff_ka_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="districtId != null">
+        #{districtId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaTime != null">
+        #{kaTime,jdbcType=INTEGER},
+      </if>
+      <if test="quitTime != null">
+        #{quitTime,jdbcType=INTEGER},
+      </if>
+      <if test="jumpTime != null">
+        #{jumpTime,jdbcType=INTEGER},
+      </if>
+      <if test="ffTime != null">
+        #{ffTime,jdbcType=INTEGER},
+      </if>
+      <if test="ffKaTime != null">
+        #{ffKaTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKaExample" resultType="java.lang.Long">
+    select count(*) from t_video_ka
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_video_ka
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceId != null">
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null">
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.districtId != null">
+        district_id = #{record.districtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kaTime != null">
+        ka_time = #{record.kaTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.quitTime != null">
+        quit_time = #{record.quitTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.jumpTime != null">
+        jump_time = #{record.jumpTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.ffTime != null">
+        ff_time = #{record.ffTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.ffKaTime != null">
+        ff_ka_time = #{record.ffKaTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_video_ka
+    set id = #{record.id,jdbcType=INTEGER},
+      province_id = #{record.provinceId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      district_id = #{record.districtId,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=TIMESTAMP},
+      ka_time = #{record.kaTime,jdbcType=INTEGER},
+      quit_time = #{record.quitTime,jdbcType=INTEGER},
+      jump_time = #{record.jumpTime,jdbcType=INTEGER},
+      ff_time = #{record.ffTime,jdbcType=INTEGER},
+      ff_ka_time = #{record.ffKaTime,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKa">
+    update t_video_ka
+    <set>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="districtId != null">
+        district_id = #{districtId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaTime != null">
+        ka_time = #{kaTime,jdbcType=INTEGER},
+      </if>
+      <if test="quitTime != null">
+        quit_time = #{quitTime,jdbcType=INTEGER},
+      </if>
+      <if test="jumpTime != null">
+        jump_time = #{jumpTime,jdbcType=INTEGER},
+      </if>
+      <if test="ffTime != null">
+        ff_time = #{ffTime,jdbcType=INTEGER},
+      </if>
+      <if test="ffKaTime != null">
+        ff_ka_time = #{ffKaTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKa">
+    update t_video_ka
+    set province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      district_id = #{districtId,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      ka_time = #{kaTime,jdbcType=INTEGER},
+      quit_time = #{quitTime,jdbcType=INTEGER},
+      jump_time = #{jumpTime,jdbcType=INTEGER},
+      ff_time = #{ffTime,jdbcType=INTEGER},
+      ff_ka_time = #{ffKaTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectBySumExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.VideoKaExample" resultMap="BaseResultMap">
+    select sum(ka_time) ka_time, sum(quit_time) quit_time, sum(jump_time) jump_time, sum(ff_time) ff_time, sum(ff_ka_time) ff_ka_time from t_video_ka
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+</mapper>

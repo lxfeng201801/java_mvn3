@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd  
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<context:component-scan base-package="com.knowyou.cloud.sys.service">
+		<!-- <context:exclude-filter type="regex" -->
+		<!-- expression="com.knowyou.cloud.sys.controller" /> -->
+	</context:component-scan>
+
+	<!-- 多数据源配置 -->
+	<bean id="ky_cloud" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+<!-- 		<property name="url" value="jdbc:mysql://172.26.177.92:3306/ky_cloud?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true" /> -->
+		<property name="url" value="jdbc:mysql://47.92.28.122:3306/ky_cloud?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true" />
+		<property name="username" value="knowyou"></property>
+		<property name="password" value="ky701@YH.com"></property>
+	</bean>
+
+	<!-- 多数据源配置 -->
+	<bean id="ky_mobile_box" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+<!-- 		<property name="url" value="jdbc:mysql://172.26.177.92:3306/ky_mobile_box?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true" /> -->
+		<property name="url" value="jdbc:mysql://47.92.28.122:3306/ky_mobile_box?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true" />
+		<property name="username" value="knowyou"></property>
+		<property name="password" value="ky701@YH.com"></property>
+	</bean>
+
+	<!-- 动态配置数据源 -->
+	<bean id="dataSource" class="com.knowyou.cloud.sys.tool.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="ky_cloud" key="ky_cloud"></entry>
+				<entry value-ref="ky_mobile_box" key="ky_mobile_box"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="ky_cloud"></property> <!-- 默认数据源 -->
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+	<!-- 3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.knowyou.cloud.sys.dao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 4. 事务管理 : DataSourceTransactionManager dataSource:引用上面定义的数据源 -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- transaction support -->
+	<!-- PlatformTransactionMnager -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- enable transaction annotation support -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+</beans> 

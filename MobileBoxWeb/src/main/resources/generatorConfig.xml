@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+	<classPathEntry location="E:/mysql/mysql-connector-java-5.1.6-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.26.177.92:3306/ky_mobile_box" userId="knowyou" password="ky701@YH.com" />
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成vo对象 -->
+		<javaModelGenerator targetPackage="com.knowyou.cloud.sys.model.mobilebox" targetProject="MobileBoxWeb" />
+		<!-- 生成用于查询的xml对象 -->
+		<sqlMapGenerator targetPackage="com.knowyou.cloud.sys.model.mobilebox.mapper" targetProject="MobileBoxWeb" />
+		<!-- 生成DAO的类文件以及配置文件 -->
+		<javaClientGenerator targetPackage="com.knowyou.cloud.sys.dao" targetProject="MobileBoxWeb" type="XMLMAPPER" />
+		
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_audience" domainObjectName="RankingAudience" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_input" domainObjectName="RankingInput" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_movie" domainObjectName="RankingMovie" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_search" domainObjectName="RankingSearch" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_tv" domainObjectName="RankingTv" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_ranking_variety_show" domainObjectName="RankingVarietyShow" /> -->
+		<table schema="ky_cloud" tableName="t_terminal" domainObjectName="Terminal" />
+<!-- 		<table schema="ky_cloud" tableName="t_user_input" domainObjectName="UserInput" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_user_online" domainObjectName="UserOnline" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_video_ka" domainObjectName="VideoKa" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_video_ka_reson" domainObjectName="VideoKaReson" /> -->
+<!-- 		<table schema="ky_cloud" tableName="t_video_type" domainObjectName="VideoType" /> -->
+	</context>
+</generatorConfiguration>  

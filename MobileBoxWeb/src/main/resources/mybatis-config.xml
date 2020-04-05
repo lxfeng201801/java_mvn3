@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打印查询语句 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="Module" type="com.knowyou.cloud.sys.model.Module" />
+		<typeAlias alias="Terminal" type="com.knowyou.cloud.sys.model.mobilebox.Terminal" />
+	</typeAliases>
+
+	<!-- <environments default="development"> -->
+	<!-- <environment id="development"> -->
+	<!-- <transactionManager type="JDBC" /> -->
+	<!-- <dataSource type="POOLED"> -->
+	<!-- <property name="driver" value="com.mysql.jdbc.Driver" /> -->
+	<!-- <property name="url" value="jdbc:mysql://172.16.1.41:3306/ky_cloud" /> -->
+	<!-- <property name="username" value="knowyou" /> -->
+	<!-- <property name="password" value="123456" /> -->
+	<!-- </dataSource> -->
+	<!-- </environment> -->
+	<!-- </environments> -->
+	<mappers>
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/GroupMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/ModuleMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/DomainMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/RoleMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/UserMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/GroupModuleMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/RoleModuleMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mapper/UserRoleMapper.xml" />
+
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/TerminalMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/TerminalSupplierMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/UserOnlineMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/UserInputMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/VideoTypeMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/VideoDelayMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/VideoKaMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/RankingInputMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/RankingMovieMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/RankingSearchMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/RankingTvMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/RankingVarietyShowMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/VideoApplyMapper.xml" />
+		<mapper resource="com/knowyou/cloud/sys/model/mobilebox/mapper/VideoQualityMapper.xml" />
+	</mappers>
+</configuration>

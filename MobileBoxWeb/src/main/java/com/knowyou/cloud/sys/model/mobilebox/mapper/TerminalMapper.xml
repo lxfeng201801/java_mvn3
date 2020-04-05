@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knowyou.cloud.sys.dao.TerminalMapper">
+  <resultMap id="BaseResultMap" type="com.knowyou.cloud.sys.model.mobilebox.Terminal">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="isCollectStatus" jdbcType="BIT" property="iscollectstatus" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="apk_ver" jdbcType="VARCHAR" property="apkVer" />
+    <result column="terminal_ver" jdbcType="VARCHAR" property="terminalVer" />
+    <result column="firmware_ver" jdbcType="VARCHAR" property="firmwareVer" />
+    <result column="input_type" jdbcType="TINYINT" property="inputType" />
+    <result column="net_type" jdbcType="TINYINT" property="netType" />
+    <result column="soft_ver" jdbcType="VARCHAR" property="softVer" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, isCollectStatus, device_id, sn, user_name, address, apk_ver, terminal_ver, firmware_ver, 
+    input_type, net_type, soft_ver, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.TerminalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_terminal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_terminal
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_terminal
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.TerminalExample">
+    delete from t_terminal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.knowyou.cloud.sys.model.mobilebox.Terminal">
+    insert into t_terminal (id, isCollectStatus, device_id, 
+      sn, user_name, address, 
+      apk_ver, terminal_ver, firmware_ver, 
+      input_type, net_type, soft_ver, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{iscollectstatus,jdbcType=BIT}, #{deviceId,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{apkVer,jdbcType=VARCHAR}, #{terminalVer,jdbcType=VARCHAR}, #{firmwareVer,jdbcType=VARCHAR}, 
+      #{inputType,jdbcType=TINYINT}, #{netType,jdbcType=TINYINT}, #{softVer,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.knowyou.cloud.sys.model.mobilebox.Terminal">
+    insert into t_terminal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="iscollectstatus != null">
+        isCollectStatus,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="apkVer != null">
+        apk_ver,
+      </if>
+      <if test="terminalVer != null">
+        terminal_ver,
+      </if>
+      <if test="firmwareVer != null">
+        firmware_ver,
+      </if>
+      <if test="inputType != null">
+        input_type,
+      </if>
+      <if test="netType != null">
+        net_type,
+      </if>
+      <if test="softVer != null">
+        soft_ver,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="iscollectstatus != null">
+        #{iscollectstatus,jdbcType=BIT},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="apkVer != null">
+        #{apkVer,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalVer != null">
+        #{terminalVer,jdbcType=VARCHAR},
+      </if>
+      <if test="firmwareVer != null">
+        #{firmwareVer,jdbcType=VARCHAR},
+      </if>
+      <if test="inputType != null">
+        #{inputType,jdbcType=TINYINT},
+      </if>
+      <if test="netType != null">
+        #{netType,jdbcType=TINYINT},
+      </if>
+      <if test="softVer != null">
+        #{softVer,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.knowyou.cloud.sys.model.mobilebox.TerminalExample" resultType="java.lang.Long">
+    select count(*) from t_terminal
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_terminal
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscollectstatus != null">
+        isCollectStatus = #{record.iscollectstatus,jdbcType=BIT},
+      </if>
+      <if test="record.deviceId != null">
+        device_id = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sn != null">
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apkVer != null">
+        apk_ver = #{record.apkVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalVer != null">
+        terminal_ver = #{record.terminalVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firmwareVer != null">
+        firmware_ver = #{record.firmwareVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputType != null">
+        input_type = #{record.inputType,jdbcType=TINYINT},
+      </if>
+      <if test="record.netType != null">
+        net_type = #{record.netType,jdbcType=TINYINT},
+      </if>
+      <if test="record.softVer != null">
+        soft_ver = #{record.softVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_terminal
+    set id = #{record.id,jdbcType=VARCHAR},
+      isCollectStatus = #{record.iscollectstatus,jdbcType=BIT},
+      device_id = #{record.deviceId,jdbcType=VARCHAR},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      apk_ver = #{record.apkVer,jdbcType=VARCHAR},
+      terminal_ver = #{record.terminalVer,jdbcType=VARCHAR},
+      firmware_ver = #{record.firmwareVer,jdbcType=VARCHAR},
+      input_type = #{record.inputType,jdbcType=TINYINT},
+      net_type = #{record.netType,jdbcType=TINYINT},
+      soft_ver = #{record.softVer,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.knowyou.cloud.sys.model.mobilebox.Terminal">
+    update t_terminal
+    <set>
+      <if test="iscollectstatus != null">
+        isCollectStatus = #{iscollectstatus,jdbcType=BIT},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="apkVer != null">
+        apk_ver = #{apkVer,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalVer != null">
+        terminal_ver = #{terminalVer,jdbcType=VARCHAR},
+      </if>
+      <if test="firmwareVer != null">
+        firmware_ver = #{firmwareVer,jdbcType=VARCHAR},
+      </if>
+      <if test="inputType != null">
+        input_type = #{inputType,jdbcType=TINYINT},
+      </if>
+      <if test="netType != null">
+        net_type = #{netType,jdbcType=TINYINT},
+      </if>
+      <if test="softVer != null">
+        soft_ver = #{softVer,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.knowyou.cloud.sys.model.mobilebox.Terminal">
+    update t_terminal
+    set isCollectStatus = #{iscollectstatus,jdbcType=BIT},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      apk_ver = #{apkVer,jdbcType=VARCHAR},
+      terminal_ver = #{terminalVer,jdbcType=VARCHAR},
+      firmware_ver = #{firmwareVer,jdbcType=VARCHAR},
+      input_type = #{inputType,jdbcType=TINYINT},
+      net_type = #{netType,jdbcType=TINYINT},
+      soft_ver = #{softVer,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
